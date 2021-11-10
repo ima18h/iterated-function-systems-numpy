@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 
 class ChaosGame:
     def __init__(self, n: int = 3, r: float = 0.5):
-        """Need to make sure input is of right type, and 0 < r > 1, n > 2"""
+        """Need to make sure input is of right type, and 0 < r > 1, n > 2.
+        This checks first, then sets the attributes after. sets to default if not possible. """
         try:
             if not isinstance(n, int):
                 raise TypeError("n should be an int > 2")
@@ -30,3 +31,4 @@ class ChaosGame:
             else:
                 self.r = r
 
+game = ChaosGame()
