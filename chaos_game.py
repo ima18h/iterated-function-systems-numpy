@@ -51,6 +51,12 @@ class ChaosGame:
             corners[i] = (np.sin(theta*i), np.cos(theta*i))
         self._corners = corners
 
+    def plot_ngon(self):
+        plt.plot(*zip(*self._corners))
+
 
 game = ChaosGame(5, 0.6)
-print(game._corners[3])
+print(game._corners)
+plt.axis("equal")
+game.plot_ngon()
+plt.show()
