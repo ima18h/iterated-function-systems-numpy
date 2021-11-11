@@ -55,11 +55,22 @@ class ChaosGame:
         plt.plot(*zip(*self._corners))
 
     def _starting_point(self):
-        print()
+        spoint = [0, 0]
+        w = [None] * self._n
+        for i in range(self._n):
+            w[i] = np.random.random()
+        wsum = sum(w)
+        for i in range(self._n):
+            w[i] = w[i] / wsum
+            spoint[0] += w[i] * self._corners[i][0]
+            spoint[1] += w[i] * self._corners[i][1]
+        return spoint
 
 
 game = ChaosGame(6, 0.6)
 print(game._corners)
 plt.axis("equal")
 game.plot_ngon()
+for i in range(10):
+    plt.scatter(*game._starting_point())
 plt.show()
