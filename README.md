@@ -12,7 +12,7 @@ Last project in IN1910
 
 
 ## Notes
-
+2b) Den siste linjen blir ikke plottet, men punktene ser bra ut. 
 
 
 ## Authors
