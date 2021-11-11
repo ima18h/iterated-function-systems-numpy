@@ -6,10 +6,14 @@ import matplotlib.pyplot as plt
 class ChaosGame:
     def __init__(self, n: int = 3, r: float = 0.5):
         """Need to make sure input is of right type, and 0 < r < 1, n > 2.
-        This checks first, then sets the attributes after. sets to default if not possible. """
+        This checks first, then sets the attributes after. sets to default if not possible.
+        _corners are 2d arrays of floats, so are _points. """
         self._n: int
         self._r: float
+        # not sure how to type corners and points,
+        # which are lists of tuples then converted to np arrays
         self._corners: list
+        self._points: list
 
         try:
             if not isinstance(n, int):
@@ -45,6 +49,8 @@ class ChaosGame:
         self._generate_ngon()
 
     def _generate_ngon(self):
+        """Generates and saves the corner points of the ngon.
+        saved as 2d array of floats"""
         theta = 2*np.pi / self._n
         corners = [None] * self._n
         for i in range(self._n):
@@ -55,6 +61,9 @@ class ChaosGame:
         plt.plot(*zip(*self._corners))
 
     def _starting_point(self):
+        """Randomly selects a starting point inside the ngon
+        :return: python list with 2 elements of float type
+        """
         spoint = [0, 0]
         w = [None] * self._n
         for i in range(self._n):
@@ -66,11 +75,35 @@ class ChaosGame:
             spoint[1] += w[i] * self._corners[i][1]
         return spoint
 
+    def iterate(self, steps: int = 10, discard: int = 5):
+        """Discards the first discard points.
+        The third element in each tuple is the random chosen corner index
+        be aware that currently index is a float"""
+        current_point = np.asarray(self._starting_point())
+
+        self._points = [(0., 0., 0)] * (steps - discard)
+        self._points = np.asarray(self._points)
+        for i in range(discard):
+            c = self._corners[np.random.randint(0, self._n)]
+            current_point = self._r * current_point + (1 - self._r) * c
+
+        for i in range(steps - discard):
+            cind = np.random.randint(0, self._n)
+            current_point = self._r * current_point + (1 - self._r) * self._corners[cind]
+            self._points[i] = *current_point, cind
+
+
+
+
+
+
 
 game = ChaosGame(6, 0.6)
-print(game._corners)
 plt.axis("equal")
 game.plot_ngon()
 for i in range(10):
     plt.scatter(*game._starting_point())
 plt.show()
+
+game.iterate()
+print(game._points)
