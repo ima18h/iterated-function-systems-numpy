@@ -49,13 +49,16 @@ class ChaosGame:
         corners = [None] * self._n
         for i in range(self._n):
             corners[i] = (np.sin(theta*i), np.cos(theta*i))
-        self._corners = corners
+        self._corners = np.asarray(corners)
 
     def plot_ngon(self):
         plt.plot(*zip(*self._corners))
 
+    def _starting_point(self):
+        print()
 
-game = ChaosGame(5, 0.6)
+
+game = ChaosGame(6, 0.6)
 print(game._corners)
 plt.axis("equal")
 game.plot_ngon()
