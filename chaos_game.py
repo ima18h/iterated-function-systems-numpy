@@ -15,13 +15,13 @@ class ChaosGame:
             n = int(n)
         if n < -2:
             print("n need to be int > 2, converting to positive int")
-            self.n = self.n * -1
+            self._n = self._n * -1
         elif -2 <= n <= 2:
             print("n has to be int > 2")
             print("using default n = 3")
-            self.n = 3
+            self._n = 3
         else:
-            self.n = n
+            self._n = n
 
         try:
             if not isinstance(r, float):
@@ -33,10 +33,12 @@ class ChaosGame:
         if not (0 < r < 1):
             print("r should be a float 0 < r < 1")
             print("using default r = 0.5")
-            self.r = 0.5
+            self._r = 0.5
         else:
-            self.r = r
+            self._r = r
+
+
 
 
 game = ChaosGame(33, 23)
-print(game.n, game.r)
+print(game._n, game._r)
