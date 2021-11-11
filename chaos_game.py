@@ -92,18 +92,26 @@ class ChaosGame:
             current_point = self._r * current_point + (1 - self._r) * self._corners[cind]
             self._points[i] = *current_point, cind
 
+    def plot(self, color=False, cmap="rainbow"):
+        """colors is a tuple of the corner indices. """
+        colors = "black"
+        if color:
+            colors = [*zip(*self._points)][-1]
+        plt.scatter([*zip(*self._points)][0], [*zip(*self._points)][1], c=colors,
+                    cmap=cmap, s=10)
+
+    def show(self, color=False, cmap="jet"):
+        plt.axis("equal")
+        plt.axis('off')
+        self.plot(color, cmap)
+        plt.show()
 
 
 
+game = ChaosGame(3)
 
 
-
-game = ChaosGame(6, 0.6)
-plt.axis("equal")
+game.iterate(1000, 10)
 game.plot_ngon()
-for i in range(10):
-    plt.scatter(*game._starting_point())
-plt.show()
+game.show(True)
 
-game.iterate()
-print(game._points)
