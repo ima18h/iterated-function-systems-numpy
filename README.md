@@ -13,6 +13,7 @@ Last project in IN1910
 
 ## Notes
 2b) Den siste linjen blir ikke plottet, men punktene ser bra ut. 
+1b) og 2c) Startpunktene har en tendens til å klumpe seg i midten. få punkter langt ute. 
 
 
 ## Authors
