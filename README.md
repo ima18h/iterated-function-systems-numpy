@@ -19,6 +19,8 @@ mye bruk av np.asarray() på lister fordi jeg er usikker med å velge dtype manu
 2f) jeg må velge farger for kantene som kan være mange. jeg bare velger tilfeldige farger. 
 3) jeg bruker np.dot som kanskje ikke er rask nok. jeg laget bare 5000 punkter
 
+4) jeg fikk ikke tid til 4, men skal sjekke den oppgaven etterpå. 
+
 
 ## Authors
 - Imad H. (imadha@mail.uio.no)
