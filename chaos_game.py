@@ -77,7 +77,7 @@ class ChaosGame:
             spoint[1] += w[i] * self._corners[i][1]
         return spoint
 
-    def iterate(self, steps: int = 10, discard: int = 5):
+    def iterate(self, steps: int = 10000, discard: int = 100):
         """Discards the first discard points.
         The third element in each tuple is the random chosen corner index
         be aware that, currently, index is a float"""
