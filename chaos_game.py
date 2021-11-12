@@ -9,6 +9,7 @@ class ChaosGame:
         _corners are 2d arrays of floats, so are _points. """
         self._n: int
         self._r: float
+        self._solved = False
         # not sure how to type corners and points,
         # which are lists of tuples then converted to np arrays
         self._corners: list
@@ -50,10 +51,10 @@ class ChaosGame:
     def _generate_ngon(self):
         """Generates and saves the corner points of the ngon.
         saved as 2d array of floats"""
-        theta = 2*np.pi / self._n
+        theta = 2 * np.pi / self._n
         corners = [(np.sin(theta), np.cos(theta))] * self._n
         for i in range(self._n):
-            corners[i] = (np.sin(theta*i), np.cos(theta*i))
+            corners[i] = (np.sin(theta * i), np.cos(theta * i))
         self._corners = np.asarray(corners)
 
     def plot_ngon(self):
@@ -77,7 +78,7 @@ class ChaosGame:
     def iterate(self, steps: int = 10, discard: int = 5):
         """Discards the first discard points.
         The third element in each tuple is the random chosen corner index
-        be aware that currently index is a float"""
+        be aware that, currently, index is a float"""
         current_point = np.asarray(self._starting_point())
 
         self._points = [(0., 0., 0)] * (steps - discard)
@@ -90,9 +91,10 @@ class ChaosGame:
             cind = np.random.randint(0, self._n)
             current_point = self._r * current_point + (1 - self._r) * self._corners[cind]
             self._points[i] = *current_point, cind
+        self._solved = True
 
     def plot(self, color=False, cmap="rainbow"):
-        """colors is a tuple of the corner indices, when color=True. """
+        """Colors is a tuple of the corner indices, when color=True. """
         colors = "black"
         if color:
             colors = self._points[:, 2]
@@ -100,18 +102,37 @@ class ChaosGame:
                     cmap=cmap, s=10)
 
     def show(self, color=False, cmap="jet"):
-        plt.axis("equal")
+        plt.axis("Equal")
         plt.axis('off')
         self.plot(color, cmap)
         plt.show()
 
     @property
     def gradient_color(self):
-        print()
+        if self._solved:
+            colors = iter([plt.cm.tab20(i) for i in range(20)])
+            cc = []
+            i = 0
+            while len(cc) < self._corners.shape[0]:
+                cc.append(next(colors))
+                i += 1
+                if i == 20:
+                    colors = iter([plt.cm.tab20b(i) for i in range(20)])
+                    i = 0
+            cc = np.delete(np.asarray(cc), 3, 1)
+            gc = np.asarray([cc[int(self._points[0][2])]] * self._points.shape[0])
+            # i need an arbitrary amount of chosen colors for the cornors
+            for i in range(1, self._points.shape[0]):
+                gc[i] = (gc[i-1] + cc[int(self._points[i][2])]) / 2
+                print(gc[i])
+            return gc
+        else:
+            print("Need to iterate() before creating colors")
 
 
 game = ChaosGame(3)
 
-game.iterate(1000, 10)
+game.iterate(100, 10)
 
 game.show(True)
+game.gradient_color
