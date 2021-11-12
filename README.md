@@ -18,6 +18,7 @@ Jeg velger å starte med oppgave 2 også løse 1 med den generelle.
 2d) vet ikke hvordan strukturere data på bra måte og jeg jobber med immutable tuples
 mye bruk av np.asarray() på lister fordi jeg er usikker med å velge dtype manuelt
 2f) jeg må velge farger for kantene som kan være mange. jeg bare velger tilfeldige farger. 
+3) jeg bruker np.dot som kanskje ikke er rask nok. jeg laget bare 5000 punkter
 
 
 ## Authors
