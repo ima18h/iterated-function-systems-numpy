@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
 class ChaosGame:
     def __init__(self, n: int = 3, r: float = 0.5):
         """Need to make sure input is of right type, and 0 < r < 1, n > 2.
@@ -13,7 +12,7 @@ class ChaosGame:
         # not sure how to type corners and points,
         # which are lists of tuples then converted to np arrays
         self._corners: list
-        self._points: list
+        self._points = np.asarray([(0., 0., 0)])
 
         try:
             if not isinstance(n, int):
@@ -52,7 +51,7 @@ class ChaosGame:
         """Generates and saves the corner points of the ngon.
         saved as 2d array of floats"""
         theta = 2*np.pi / self._n
-        corners = [None] * self._n
+        corners = [(np.sin(theta), np.cos(theta))] * self._n
         for i in range(self._n):
             corners[i] = (np.sin(theta*i), np.cos(theta*i))
         self._corners = np.asarray(corners)
@@ -65,7 +64,7 @@ class ChaosGame:
         :return: python list with 2 elements of float type
         """
         spoint = [0, 0]
-        w = [None] * self._n
+        w = [0.] * self._n
         for i in range(self._n):
             w[i] = np.random.random()
         wsum = sum(w)
@@ -107,11 +106,8 @@ class ChaosGame:
         plt.show()
 
 
-
 game = ChaosGame(3)
-
 
 game.iterate(1000, 10)
 game.plot_ngon()
 game.show(True)
-
