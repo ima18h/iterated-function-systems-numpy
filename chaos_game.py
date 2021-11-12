@@ -77,7 +77,7 @@ class ChaosGame:
             spoint[1] += w[i] * self._corners[i][1]
         return spoint
 
-    def iterate(self, steps: int = 10, discard: int = 5):
+    def iterate(self, steps: int = 10000, discard: int = 100):
         """Discards the first discard points.
         The third element in each tuple is the random chosen corner index
         be aware that, currently, index is a float"""
@@ -131,7 +131,7 @@ class ChaosGame:
             colors = iter([plt.cm.tab20(i) for i in range(20)])
             cc = []
             i = 0
-            # TODO: this can only create a limited number of colors then repeat
+            # TODO: this can only create a limited number of colors then repeat set pattern
             while len(cc) < self._corners.shape[0]:
                 cc.append(next(colors))
                 i += 1
