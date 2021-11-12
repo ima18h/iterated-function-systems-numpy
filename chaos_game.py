@@ -131,7 +131,7 @@ class ChaosGame:
             colors = iter([plt.cm.tab20(i) for i in range(20)])
             cc = []
             i = 0
-            # TODO: this can only create a limited number of colors then repeat
+            # TODO: this can only create a limited number of colors then repeat set pattern
             while len(cc) < self._corners.shape[0]:
                 cc.append(next(colors))
                 i += 1
