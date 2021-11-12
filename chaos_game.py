@@ -57,7 +57,7 @@ class ChaosGame:
         self._corners = np.asarray(corners)
 
     def plot_ngon(self):
-        plt.plot(*zip(*self._corners))
+        plt.plot(self._corners[:, 0], self._corners[:, 1])
 
     def _starting_point(self):
         """Randomly selects a starting point inside the ngon
@@ -92,11 +92,11 @@ class ChaosGame:
             self._points[i] = *current_point, cind
 
     def plot(self, color=False, cmap="rainbow"):
-        """colors is a tuple of the corner indices. """
+        """colors is a tuple of the corner indices, when color=True. """
         colors = "black"
         if color:
-            colors = [*zip(*self._points)][-1]
-        plt.scatter([*zip(*self._points)][0], [*zip(*self._points)][1], c=colors,
+            colors = self._points[:, 2]
+        plt.scatter(self._points[:, 0], self._points[:, 1], c=colors,
                     cmap=cmap, s=10)
 
     def show(self, color=False, cmap="jet"):
@@ -105,9 +105,13 @@ class ChaosGame:
         self.plot(color, cmap)
         plt.show()
 
+    @property
+    def gradient_color(self):
+        print()
+
 
 game = ChaosGame(3)
 
 game.iterate(1000, 10)
-game.plot_ngon()
+
 game.show(True)
