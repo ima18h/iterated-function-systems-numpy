@@ -12,6 +12,7 @@ Last project in IN1910
 
 
 ## Notes
+Jeg velger å starte med oppgave 2 også løse 1 med den generelle. 
 2b) Den siste linjen blir ikke plottet, men punktene ser bra ut. 
 1b) og 2c) Startpunktene har en tendens til å klumpe seg i midten. få punkter langt ute. 
 2d) vet ikke hvordan strukturere data på bra måte og jeg jobber med immutable tuples
