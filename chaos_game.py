@@ -95,25 +95,26 @@ class ChaosGame:
             self._points[i] = *current_point, cind
         self._solved = True
 
-    def plot(self, color=False, cmap="rainbow"):
+    def plot(self, color: bool, cmap: str):
         """Colors is a tuple of the corner indices, when color=True. """
         colors = "black"
         if color:
             colors = self.gradient_color
         plt.scatter(self._points[:, 0], self._points[:, 1], c=colors,
-                    cmap=cmap, s=10)
+                    cmap=cmap, s=0.1)
 
-    def show(self, color=False, cmap="jet"):
+    def show(self, color=False, cmap="rainbow"):
         plt.axis("Equal")
         plt.axis('off')
         self.plot(color, cmap)
         plt.show()
 
-    def savepng(self, outfile: str, color=False, cmap="jet"):
+    def savepng(self, outfile: str, color=False, cmap="rainbow"):
         plt.axis("Equal")
         plt.axis('off')
         self.plot(color, cmap)
-        plt.savefig(pathlib.Path(__file__).parent.resolve().__str__() + '\\figures\\' + outfile)
+        plt.savefig(pathlib.Path(__file__).parent.resolve().__str__() + '\\figures\\' + outfile,
+                    dpi=400)
 
     @property
     def gradient_color(self):
@@ -139,17 +140,16 @@ class ChaosGame:
             gc = np.asarray([cc[int(self._points[0][2])]] * self._points.shape[0])
             # i need an arbitrary amount of chosen colors for the corners
             for i in range(1, self._points.shape[0]):
-                gc[i] = (gc[i-1] + cc[int(self._points[i][2])]) / 2
+                gc[i] = (gc[i - 1] + cc[int(self._points[i][2])]) / 2
             return gc
         else:
             # TODO: raise exception here?
             print("Need to iterate() before creating colors")
 
+# testing stuff
+# game = ChaosGame(6, 1/3)
 
-game = ChaosGame(3)
+# game.iterate(20000, 100)
 
-game.iterate(1000, 10)
-
-#game.show(True)
-game.savepng("ass.png", True)
-print(pathlib.Path(__file__).parent.resolve().__str__() + '\\figures')
+# game.show(True)
+# game.savepng("stonks", True)
