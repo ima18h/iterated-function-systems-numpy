@@ -7,8 +7,7 @@ Last project in IN1910
 
 
 ## Lessons Learned
-- Learned how git can be used to keep things organized, and for potential cooperation. 
-
+- This was a fun project. Coding is cool.
 
 
 ## Notes
