@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pathlib
 
 
 class ChaosGame:
@@ -108,8 +109,11 @@ class ChaosGame:
         self.plot(color, cmap)
         plt.show()
 
-    def savepng(outfile, color=False, cmap="jet"):
-        print()
+    def savepng(self, outfile: str, color=False, cmap="jet"):
+        plt.axis("Equal")
+        plt.axis('off')
+        self.plot(color, cmap)
+        plt.savefig(pathlib.Path(__file__).parent.resolve().__str__() + '\\figures\\' + outfile)
 
     @property
     def gradient_color(self):
@@ -146,4 +150,6 @@ game = ChaosGame(3)
 
 game.iterate(1000, 10)
 
-game.show(True)
+#game.show(True)
+game.savepng("ass.png", True)
+print(pathlib.Path(__file__).parent.resolve().__str__() + '\\figures')
