@@ -15,6 +15,7 @@ class ChaosGame:
         self._corners: list
         self._points = np.asarray([(0., 0., 0)])
 
+        # better way to handle all situations? this looks a bit ugly to me in constructor
         try:
             if not isinstance(n, int):
                 raise TypeError("n should be an int")
@@ -97,7 +98,7 @@ class ChaosGame:
         """Colors is a tuple of the corner indices, when color=True. """
         colors = "black"
         if color:
-            colors = self._points[:, 2]
+            colors = self.gradient_color
         plt.scatter(self._points[:, 0], self._points[:, 1], c=colors,
                     cmap=cmap, s=10)
 
@@ -107,12 +108,22 @@ class ChaosGame:
         self.plot(color, cmap)
         plt.show()
 
+    def savepng(outfile, color=False, cmap="jet"):
+        print()
+
     @property
     def gradient_color(self):
+        """Returns an array with each points rgb colors calculated based on
+        the selected corner and the previous points color
+        gc = gradiant colors, cc = corner colors
+
+        :return: array of shape (x, 3). x depends on how many iterated points
+        """
         if self._solved:
             colors = iter([plt.cm.tab20(i) for i in range(20)])
             cc = []
             i = 0
+            # TODO: this can only create a limited number of colors then repeat
             while len(cc) < self._corners.shape[0]:
                 cc.append(next(colors))
                 i += 1
@@ -120,19 +131,19 @@ class ChaosGame:
                     colors = iter([plt.cm.tab20b(i) for i in range(20)])
                     i = 0
             cc = np.delete(np.asarray(cc), 3, 1)
+            # probably exists better way to initialize gc than converting back to list
             gc = np.asarray([cc[int(self._points[0][2])]] * self._points.shape[0])
-            # i need an arbitrary amount of chosen colors for the cornors
+            # i need an arbitrary amount of chosen colors for the corners
             for i in range(1, self._points.shape[0]):
                 gc[i] = (gc[i-1] + cc[int(self._points[i][2])]) / 2
-                print(gc[i])
             return gc
         else:
+            # TODO: raise exception here?
             print("Need to iterate() before creating colors")
 
 
 game = ChaosGame(3)
 
-game.iterate(100, 10)
+game.iterate(1000, 10)
 
 game.show(True)
-game.gradient_color
