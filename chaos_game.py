@@ -100,8 +100,11 @@ class ChaosGame:
         colors = "black"
         if color:
             colors = self.gradient_color
-        plt.scatter(self._points[:, 0], self._points[:, 1], c=colors,
-                    cmap=cmap, s=0.1)
+        if self._solved:
+            plt.scatter(self._points[:, 0], self._points[:, 1], c=colors,
+                        cmap=cmap, s=0.1)
+        else:
+            raise Exception("Need to iterate() before plotting")
 
     def show(self, color=False, cmap="rainbow"):
         plt.axis("Equal")
@@ -143,8 +146,7 @@ class ChaosGame:
                 gc[i] = (gc[i - 1] + cc[int(self._points[i][2])]) / 2
             return gc
         else:
-            # TODO: raise exception here?
-            print("Need to iterate() before creating colors")
+            raise Exception("Need to iterate() before creating colors")
 
 # testing stuff
 # game = ChaosGame(6, 1/3)
