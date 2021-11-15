@@ -18,6 +18,13 @@ class Variations:
     def transform(self):
         return self._func(self._x, self._y)
 
+    @classmethod
+    def from_chaos_game(cls, game, variation):
+        # TODO: this if should probably be handled by ChaosGame class, not here
+        if not game._solved:
+            raise Exception("game not solved. use iterate method first.")
+        return Variations(game._points[:, 0], game._points[:, 1], variation)
+
     @staticmethod
     def linear(x, y) -> tuple[list, list]:
         return x, y
@@ -53,6 +60,7 @@ class Variations:
         return c * ((x-y) * (x+y)), c * 2 * x*y
 
 
+"""
 N = 70
 grid_values = np.linspace(-1, 1, N)
 x, y = np.meshgrid(grid_values, grid_values)
@@ -73,3 +81,14 @@ for i, (ax, variation) in enumerate(zip(axs.flatten(), variations)):
 
 fig.savefig("figures/variations_4b.png")
 plt.show()
+"""
+
+# plot variations of chaos game
+# TODO: after iterating, game object becomes NoneType. wtf? importing variations into chaos_game works fine
+#game = cg.ChaosGame().iterate(20000, 100)
+#print(type(game))
+#colors = game.gradient_color
+#variation = Variations.from_chaos_game(game, "horseshoe").transform()
+
+
+#plt.scatter(variation[:,0], -variation[:,1], s=0.2, marker=".", c=colors)
