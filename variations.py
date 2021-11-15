@@ -1,3 +1,4 @@
+from __future__ import annotations
 #import chaos_game as cg
 import numpy as np
 import matplotlib.pyplot as plt
@@ -24,6 +25,18 @@ class Variations:
         if not game._solved:
             raise Exception("game not solved. use iterate method first.")
         return Variations(game._points[:, 0], game._points[:, 1], variation)
+
+    @classmethod
+    def linear_combination_wrap(cls, var1: Variations, var2: Variations):
+        # TODO: sanitize. x,y should be same for vars. are vars transformed yet?
+        def linear_combination(w):
+            if not (0 <= w <= 1):
+                raise Exception("w should be between 0 and 1")
+            # assuming not transformed yet
+            u1, v1 = var1.transform()
+            u2, v2 = var2.transform()
+            return w * u1 + (1-w) * u2, w * v1 + (1-w) * v2
+        return linear_combination
 
     @staticmethod
     def linear(x, y) -> tuple[list, list]:
