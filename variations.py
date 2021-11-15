@@ -1,5 +1,6 @@
 #import chaos_game as cg
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class Variations:
@@ -51,3 +52,24 @@ class Variations:
         c = 1 / r
         return c * ((x-y) * (x+y)), c * 2 * x*y
 
+
+N = 70
+grid_values = np.linspace(-1, 1, N)
+x, y = np.meshgrid(grid_values, grid_values)
+x_values = x.flatten()
+y_values = y.flatten()
+
+transformations = ["linear", "handkerchief", "swirl", "eyefish"]
+variations = [Variations(x_values, y_values, version) for version in transformations]
+
+fig, axs = plt.subplots(2, 2, figsize=(9, 9))
+for i, (ax, variation) in enumerate(zip(axs.flatten(), variations)):
+    u, v = variation.transform()
+
+    ax.plot(u, -v, markersize=1, marker=".", linestyle="", color="black")
+    # ax.scatter(u, -v, s=0.2, marker=".", color="black")
+    ax.set_title(variation._variation)
+    ax.axis("off")
+
+fig.savefig("figures/variations_4b.png")
+plt.show()
