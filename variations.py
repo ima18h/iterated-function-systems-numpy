@@ -7,13 +7,18 @@ class Variations:
         self._x = x
         self._y = y
         self._variation = name
-        self._func = getattr(Variations, name)
+        _implemented = ["linear", "handkerchief", "swirl",
+                             "disc", "eyefish", "horseshoe"]
+        if name.lower() in _implemented:
+            self._func: callable = getattr(Variations, name)
+        else:
+            raise Exception("variation not implemented")
 
     def transform(self):
         return self._func(self._x, self._y)
 
     @staticmethod
-    def linear(x, y):
+    def linear(x, y) -> tuple[list, list]:
         return x, y
 
     @staticmethod
