@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pathlib
+from variations import Variations as varis
 
 
 class ChaosGame:
@@ -149,9 +150,15 @@ class ChaosGame:
             raise Exception("Need to iterate() before creating colors")
 
 # testing stuff
-# game = ChaosGame(6, 1/3)
+game = ChaosGame(6, 1/3)
 
-# game.iterate(20000, 100)
+game.iterate(20000, 100)
 
 # game.show(True)
 # game.savepng("stonks", True)
+colors = game.gradient_color
+variation = varis.from_chaos_game(game, "horseshoe").transform()
+
+print(variation[0])
+plt.scatter(variation[0], -variation[1], s=0.2, marker=".", c=colors)
+plt.show()
