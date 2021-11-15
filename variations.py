@@ -35,7 +35,7 @@ class Variations:
             # assuming not transformed yet
             u1, v1 = var1.transform()
             u2, v2 = var2.transform()
-            return w * u1 + (1-w) * u2, w * v1 + (1-w) * v2
+            return (1-w) * u1 + w * u2, (1-w) * v1 + w * v2
         return linear_combination
 
     @staticmethod
