@@ -73,6 +73,7 @@ class Variations:
         return c * ((x-y) * (x+y)), c * 2 * x*y
 
 
+# under here for plotting and testing stuff
 """
 N = 70
 grid_values = np.linspace(-1, 1, N)
