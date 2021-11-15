@@ -11,15 +11,17 @@ Last project in IN1910
 
 
 ## Notes
-Jeg velger å starte med oppgave 2 også løse 1 med den generelle. 
-2b) Den siste linjen blir ikke plottet, men punktene ser bra ut. 
-1b) og 2c) Startpunktene har en tendens til å klumpe seg i midten. få punkter langt ute. 
-2d) vet ikke hvordan strukturere data på bra måte og jeg jobber med immutable tuples
+- Jeg velger å starte med oppgave 2 også løse 1 med den generelle. 
+- 2b) Den siste linjen blir ikke plottet, men punktene ser bra ut. 
+- 1b) og 2c) Startpunktene har en tendens til å klumpe seg i midten. få punkter langt ute. 
+- 2d) vet ikke hvordan strukturere data på bra måte og jeg jobber med immutable tuples
 mye bruk av np.asarray() på lister fordi jeg er usikker med å velge dtype manuelt
-2f) jeg må velge farger for kantene som kan være mange. jeg bare velger tilfeldige farger. 
-3) jeg bruker np.dot som kanskje ikke er rask nok. jeg laget bare 5000 punkter
+- 2f) jeg må velge farger for kantene som kan være mange. jeg bare velger tilfeldige farger. 
+- 3) jeg bruker np.dot som kanskje ikke er rask nok. jeg laget bare 5000 punkter
 
-4) jeg fikk ikke tid til 4, men skal sjekke den oppgaven etterpå. 
+- 4) Det er noe rart som skjer når jeg prøver å bruke iterate() inni variations klassen.
+jeg mister chaosgame objektet og det blir bare NoneType. Hva er det som skjer? 
+- men jeg kan løse det helt fint inni chaosgame filen og importerer inn variations. 
 
 
 ## Authors
