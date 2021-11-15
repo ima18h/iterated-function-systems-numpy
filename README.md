@@ -21,7 +21,7 @@ mye bruk av np.asarray() på lister fordi jeg er usikker med å velge dtype manu
 
 - 4) Det er noe rart som skjer når jeg prøver å bruke iterate() inni variations klassen.
 jeg mister chaosgame objektet og det blir bare NoneType. Hva er det som skjer? 
-- men jeg kan løse det helt fint inni chaosgame filen og importerer inn variations. 
+- løser det helt fint inni chaosgame filen. men vet du hvorfor dette skjer? 
 
 
 ## Authors
