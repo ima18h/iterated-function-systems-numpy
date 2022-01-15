@@ -151,8 +151,8 @@ class ChaosGame:
 
 
 # testing stuff
-game = ChaosGame(8, 1/3)
-game.iterate(20000, 100)
+game = ChaosGame(7, 2/3)
+game.iterate(50000, 100)
 colors = game.gradient_color
 """
 
@@ -169,8 +169,8 @@ plt.show()
 
 coeffs = np.linspace(0, 1, 4)
 
-variation1 = varis.from_chaos_game(game, "linear")
-variation2 = varis.from_chaos_game(game, "horseshoe")
+variation1 = varis.from_chaos_game(game, "eyefish")
+variation2 = varis.from_chaos_game(game, "handkerchief")
 
 variation12 = varis.linear_combination_wrap(variation1, variation2)
 
@@ -178,7 +178,11 @@ fig, axs = plt.subplots(2, 2, figsize=(9, 9))
 for ax, w in zip(axs.flatten(), coeffs):
     u, v = variation12(w)
 
-    ax.scatter(u, -v, s=0.2, marker=".", c=colors)
+    ax.scatter(u, -v, s=0.2, marker=",", c=colors)
     ax.set_title(f"weight = {w:.2f}")
     ax.axis("off")
+    plt.grid(True)
+
+plt.savefig(pathlib.Path(__file__).parent.resolve().__str__() + '\\figures\\' + "variation_eyefish_handkerchief4",
+            dpi=400)
 plt.show()
