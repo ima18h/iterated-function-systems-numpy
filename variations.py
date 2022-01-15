@@ -93,12 +93,12 @@ for i, (ax, variation) in enumerate(zip(axs.flatten(), variations)):
     ax.set_title(variation._variation)
     ax.axis("off")
 
-fig.savefig("figures/variations_4b.png")
+fig.savefig("figures/variations.png")
 plt.show()
 """
 
 # plot variations of chaos game
-# TODO: after iterating, game object becomes NoneType. wtf? importing variations into chaos_game works fine
+# TODO: after calling iterate(), game object becomes NoneType at some point. wtf? importing variations into chaos_game works fine
 #game = cg.ChaosGame().iterate(20000, 100)
 #print(type(game))
 #colors = game.gradient_color
